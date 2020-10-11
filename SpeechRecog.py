@@ -1,11 +1,14 @@
 import speech_recognition as sr
-recog = sr.Recognizer()
+
+r=sr.Recognizer()
+print(sr.Microphone.list_microphone_names())
 with sr.Microphone() as source:
-    print("Say Something:")
-    audio = recog.listen(source)
+    r.adjust_for_ambient_noise(source,duration=1)
+    # r.energy_threshold()
+    print("say anything : ")
+    audio= r.listen(source)
     try:
-        text = recog.recognize_google(audio)
-        print("You said:")
+        text = r.recognize_google(audio)
         print(text)
     except:
-        print("Sorry, couldn't recognize your speech.")
+        print("sorry, could not recognise")
